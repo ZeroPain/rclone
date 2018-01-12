@@ -8,6 +8,7 @@ import (
 
 	"github.com/ncw/rclone/cmd"
 	"github.com/ncw/rclone/fs"
+	"github.com/ncw/rclone/fs/config"
 	"github.com/ncw/rclone/vfs"
 	"github.com/ncw/rclone/vfs/vfsflags"
 	"github.com/pkg/errors"
@@ -182,17 +183,17 @@ will see all files and folders immediately in this mode.
 
 	// Add flags
 	flags := commandDefintion.Flags()
-	fs.BoolVarP(flags, &DebugFUSE, "debug-fuse", "", DebugFUSE, "Debug the FUSE internals - needs -v.")
+	config.BoolVarP(flags, &DebugFUSE, "debug-fuse", "", DebugFUSE, "Debug the FUSE internals - needs -v.")
 	// mount options
-	fs.BoolVarP(flags, &AllowNonEmpty, "allow-non-empty", "", AllowNonEmpty, "Allow mounting over a non-empty directory.")
-	fs.BoolVarP(flags, &AllowRoot, "allow-root", "", AllowRoot, "Allow access to root user.")
-	fs.BoolVarP(flags, &AllowOther, "allow-other", "", AllowOther, "Allow access to other users.")
-	fs.BoolVarP(flags, &DefaultPermissions, "default-permissions", "", DefaultPermissions, "Makes kernel enforce access control based on the file mode.")
-	fs.BoolVarP(flags, &WritebackCache, "write-back-cache", "", WritebackCache, "Makes kernel buffer writes before sending them to rclone. Without this, writethrough caching is used.")
-	fs.FlagsVarP(flags, &MaxReadAhead, "max-read-ahead", "", "The number of bytes that can be prefetched for sequential reads.")
-	fs.StringArrayVarP(flags, &ExtraOptions, "option", "o", []string{}, "Option for libfuse/WinFsp. Repeat if required.")
-	fs.StringArrayVarP(flags, &ExtraFlags, "fuse-flag", "", []string{}, "Flags or arguments to be passed direct to libfuse/WinFsp. Repeat if required.")
-	//fs.BoolVarP(flags, &foreground, "foreground", "", foreground, "Do not detach.")
+	config.BoolVarP(flags, &AllowNonEmpty, "allow-non-empty", "", AllowNonEmpty, "Allow mounting over a non-empty directory.")
+	config.BoolVarP(flags, &AllowRoot, "allow-root", "", AllowRoot, "Allow access to root user.")
+	config.BoolVarP(flags, &AllowOther, "allow-other", "", AllowOther, "Allow access to other users.")
+	config.BoolVarP(flags, &DefaultPermissions, "default-permissions", "", DefaultPermissions, "Makes kernel enforce access control based on the file mode.")
+	config.BoolVarP(flags, &WritebackCache, "write-back-cache", "", WritebackCache, "Makes kernel buffer writes before sending them to rclone. Without this, writethrough caching is used.")
+	config.FlagsVarP(flags, &MaxReadAhead, "max-read-ahead", "", "The number of bytes that can be prefetched for sequential reads.")
+	config.StringArrayVarP(flags, &ExtraOptions, "option", "o", []string{}, "Option for libfuse/WinFsp. Repeat if required.")
+	config.StringArrayVarP(flags, &ExtraFlags, "fuse-flag", "", []string{}, "Flags or arguments to be passed direct to libfuse/WinFsp. Repeat if required.")
+	//config.BoolVarP(flags, &foreground, "foreground", "", foreground, "Do not detach.")
 
 	// Add in the generic flags
 	vfsflags.AddFlags(flags)
